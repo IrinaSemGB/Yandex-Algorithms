@@ -1,0 +1,42 @@
+Задача
+
+Дана строка в кодировке (UTF-8)
+Найти самый часто встречающийся в ней символ.
+Если несколько символов встречаются одинаково часто, можно вывести любой.
+
+Тесты
+
+String input = 'ababa';
+String input1 = 'aabb';
+String input2 = 'aab';
+String input3 = 'abb';
+String input4 = 'a';
+String input5 = '';
+
+Решение
+
+void main() {
+  print(findSymbol(input: input5));
+}
+
+String findSymbol({required String input}) {
+
+  String ans = ''; 
+  int count = 0; 
+  Map dic = {};
+
+  for (int i = 0; i < input.length; i++) {
+    String sym = input[i];
+    if (!dic.containsKey(sym)) {
+      dic[sym] = 0;
+    }
+    
+    dic[sym] += 1;
+    
+    if (dic[sym] > count) {
+      ans = sym;
+      count = dic[sym];
+    }
+  }
+  return ans;
+}
