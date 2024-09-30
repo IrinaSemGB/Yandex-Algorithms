@@ -1,0 +1,54 @@
+Задача
+
+Даны три целых числа a, b и c. 
+Найдите все корни уравнения ax2 + bx + c = 0 и выведите их в порядке возрастания.
+
+Тесты
+
+String test1 = '1 -2 0';
+String test2 = '1 2 1';
+String test3 = '1 1 1';
+String test4 = '0 1 1';
+String test5 = '0 0 1';
+String test6 = '0 0 0';
+
+import 'dart:math';
+
+void main() {
+  List<double> input = test1.split(' ').map((el) => double.parse(el)).toList();
+  print(findRoots(a: input[0], b: input[1], c: input[2]));
+}
+
+String findRoots({required double a, required double b, required double c}) {
+  
+  if (a == 0) { // линейное уравнение
+    
+    if (b != 0) {
+      return '${-c / b}';
+    }
+    
+    if (b == 0 && c == 0) {
+      return 'Бесконечное множество корней';
+    }
+    
+    return 'Нет корней';
+  }
+  
+  final double discr = pow(b, 2) - (4 * a * c); // квадратное уравнение
+  
+  if (discr > 0) {
+    double x1 = (-b + sqrt(discr)) / (2 * a);
+    double x2 = (-b - sqrt(discr)) / (2 * a);
+    
+    if (x1 > x2) {
+      return '$x2, $x1';
+    }
+    return '$x1, $x2';
+  }
+  
+  if (discr == 0) {
+    return '${-b / (2 * a)}';
+  }
+  
+  return 'Действительных корней нет';
+}
